@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App de Estudo: Arquitetura de Redes</title>
+    <title>App de Estudo: Arquitetura de Redes (Completo)</title>
     <style>
         :root {
-            --primary: #0284C7; /* Azul Rede */
-            --secondary: #059669; /* Verde Sucesso */
+            --primary: #0284C7; 
+            --secondary: #059669; 
             --bg-color: #F3F4F6;
             --card-bg: #FFFFFF;
             --text-main: #1F2937;
             --text-muted: #4B5563;
             --danger: #DC2626;
+            --accent: #F59E0B;
         }
 
         body {
@@ -24,10 +25,8 @@
             line-height: 1.6;
         }
 
-        /* TRUQUE PARA ESCONDER AS CITAÇÕES DO SISTEMA DA IA */
-        .cite {
-            display: none !important;
-        }
+        /* TRUQUE PARA ESCONDER AS CITAÇÕES DO SISTEMA DA IA NA TELA DO USUÁRIO */
+        .cite { display: none !important; }
 
         header {
             background-color: var(--primary);
@@ -87,9 +86,8 @@
             border-left: 4px solid var(--primary);
         }
 
-        .card.destaque {
-            border-left: 4px solid var(--secondary);
-        }
+        .card.destaque { border-left: 4px solid var(--secondary); }
+        .card.alerta { border-left: 4px solid var(--accent); }
 
         .card h3 {
             margin-top: 0;
@@ -98,8 +96,6 @@
             padding-bottom: 0.5rem;
         }
 
-        .card h4 { color: #374151; margin-bottom: 0.5rem; }
-
         .highlight {
             background-color: #FEF3C7;
             padding: 0.1rem 0.3rem;
@@ -107,17 +103,12 @@
             font-weight: bold;
         }
 
-        .list-unstyled {
-            list-style-type: none;
-            padding: 0;
-        }
-
+        .list-unstyled { list-style-type: none; padding: 0; }
         .list-unstyled li {
             margin-bottom: 0.5rem;
             padding-left: 1.5rem;
             position: relative;
         }
-
         .list-unstyled li::before {
             content: "✓";
             color: var(--secondary);
@@ -200,7 +191,6 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-
         .quiz-option:hover { background: #F9FAFB; }
 
         .quiz-btn {
@@ -233,122 +223,109 @@
 <body>
 
     <header>
-        <h1>🌐 Revisão: Arquitetura de Redes</h1>
-        <p>Foco na Prova - Topologias, Modelo OSI, IP e Máscaras</p>
+        <h1>🌐 Arquitetura de Redes: A Revisão Definitiva</h1>
+        <p>Foco na Prova - Resumo alinhado aos PDFs do Professor</p>
     </header>
 
     <div class="tabs">
-        <button class="tab-btn active" onclick="openTab(event, 'prova')">📝 Prova (Revisão)</button>
-        <button class="tab-btn" onclick="openTab(event, 'resumo')">⚡ Resumo Rápido</button>
-        <button class="tab-btn" onclick="openTab(event, 'conteudo')">📖 Conteúdo Completo</button>
+        <button class="tab-btn active" onclick="openTab(event, 'resumo')">⚡ Resumo Rápido</button>
+        <button class="tab-btn" onclick="openTab(event, 'conceitos')">📖 Conceitos & Topologias</button>
+        <button class="tab-btn" onclick="openTab(event, 'osi')">📚 Modelo OSI e TCP/IP</button>
         <button class="tab-btn" onclick="openTab(event, 'flashcards')">🗂️ Flashcards</button>
         <button class="tab-btn" onclick="openTab(event, 'quiz')">🎯 Quiz</button>
     </div>
 
-    <div id="prova" class="tab-content active">
-        <h2>Perguntas da Revisão Oficial</h2>
-        
-        <div class="card">
-            <h3>1. Topologia comumente utilizada para LAN (Rede Local)</h3>
-            <p>A topologia mais utilizada para LAN é a <strong>Estrela</strong>.</p>
-            <ul>
-                <li><strong>Vantagens:</strong> Maior tolerância a falhas (se uma máquina ou cabo parar, apenas aquela estação cai), facilidade de instalação e manutenção.</li>
-                <li><strong>Desvantagens:</strong> Dependência total do nó central (se o Switch parar, a rede inteira cai).</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>2. Topologia comumente utilizada em um backbone WAN</h3>
-            <p>A topologia mais utilizada para backbone WAN é a <strong>Malha</strong>.</p>
-            <ul>
-                <li><strong>Vantagens:</strong> Transmissão de dados mais consistente e excelente redundância.</li>
-                <li><strong>Desvantagens:</strong> Requer uma enorme quantidade de cabos/links, tornando sua implementação muito cara.</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>3, 4 e 5. Domínios de Colisão e Broadcast</h3>
-            <p><strong>Repetidor / Hub (Camada 1):</strong> Máquinas interligadas ESTÃO no mesmo domínio de colisão e broadcast.</p>
-            <p><strong>Switch (Camada 2):</strong> Máquinas conectadas <span class="highlight">NÃO estão</span> no mesmo domínio de colisão (quebrado por porta), mas ESTÃO no mesmo domínio de broadcast.</p>
-            <p><strong>Roteador (Camada 3):</strong> <span class="highlight">Quebra domínios de broadcast</span> e de colisão.</p>
-        </div>
-
-        <div class="card destaque">
-            <h3>Atividade: Endereços IP e Máscaras (NOVO)</h3>
-            <p><strong>IP Válido:</strong> Possui 4 octetos e números entre 0 e 255. Ex: 192.168.0.1. Inválido: 10.0.1 (só 3 octetos) ou 192.168.256.1 (passa de 255).</p>
-            <p><strong>Máscara Válida:</strong> Em binário, deve ter "1"s contínuos. Na prática, não pode alternar. Válidas: 255.0.0.0, 255.255.0.0. Inválidas: 255.0.255.0 (intercalou zero no meio).</p>
-        </div>
-
-        <div class="card">
-            <h3>7. Como funciona o encapsulamento de dados?</h3>
-            <p>No encapsulamento, quando uma aplicação envia dados, esses dados descem pelas camadas. Cada camada acrescenta seu próprio cabeçalho (IPs na de Rede, MAC na de Enlace). Ao chegar ao destino, o processo inverso ocorre (desencapsulamento).</p>
-        </div>
-    </div>
-
-    <div id="resumo" class="tab-content">
+    <div id="resumo" class="tab-content active">
         <h2>Resumo Rápido (Cheat Sheet)</h2>
 
-        <div class="card destaque">
-            <h3>Regras de Ouro: Endereçamento (NOVO)</h3>
+        <div class="card alerta">
+            <h3>Nomenclatura PDU por Camada OSI (Cai muito!) <span class="cite"></span></h3>
+            <p>O que trafega em cada camada durante o encapsulamento:</p>
             <ul>
-                <li><strong>Classe A (Público/Privado):</strong> Rede.Host.Host.Host | Privado: 10.x.x.x</li>
-                <li><strong>Classe B (Público/Privado):</strong> Rede.Rede.Host.Host | Privado: 172.16.x.x até 172.31.x.x</li>
-                <li><strong>Classe C (Público/Privado):</strong> Rede.Rede.Rede.Host | Privado: 192.168.x.x</li>
-                <li><strong>Loopback:</strong> 127.x.x.x (reservado para testes da própria máquina).</li>
+                <li><strong>Camadas 5, 6 e 7 (Sessão, Apresentação, Aplicação):</strong> Dados (Mensagem) <span class="cite">[cite: 948]</span></li>
+                <li><strong>Camada 4 (Transporte):</strong> Segmentos <span class="cite">[cite: 953]</span></li>
+                <li><strong>Camada 3 (Rede):</strong> Pacotes / Datagramas <span class="cite">[cite: 959]</span></li>
+                <li><strong>Camada 2 (Enlace):</strong> Quadros / Frames <span class="cite">[cite: 963]</span></li>
+                <li><strong>Camada 1 (Física):</strong> Bits <span class="cite">[cite: 967]</span></li>
             </ul>
         </div>
         
-        <div class="card">
-            <h3>Equipamentos e Camadas</h3>
+        <div class="card destaque">
+            <h3>Equipamentos e Camadas <span class="cite">[cite: 1003, 1028, 1072, 1040]</span></h3>
             <ul>
-                <li><strong>Hub / Repetidor:</strong> Camada 1 (Física). Apenas repete sinal.</li>
-                <li><strong>Switch:</strong> Camada 2 (Enlace). Trabalha com MAC. <strong>Quebra domínio de colisão</strong>.</li>
-                <li><strong>Roteador:</strong> Camada 3 (Rede). Trabalha com IP. <strong>Quebra domínios de broadcast</strong>.</li>
+                <li><strong>Hub / Repetidor:</strong> Camada 1 (Física). Apenas repete sinal. Não quebra colisão. <span class="cite">[cite: 1739, 1743]</span></li>
+                <li><strong>Switch / Bridge:</strong> Camada 2 (Enlace). Trabalha com Quadros e MAC. <strong>Quebra domínio de colisão</strong>. <span class="cite">[cite: 1047, 1753]</span></li>
+                <li><strong>Roteador:</strong> Camada 3 (Rede). Trabalha com Pacotes e IP. <strong>Quebra domínio de broadcast</strong> e faz roteamento. <span class="cite">[cite: 1073, 1761]</span></li>
             </ul>
         </div>
 
         <div class="card">
-            <h3>Modos de Comunicação (Direção)</h3>
+            <h3>Abrangência de Redes <span class="cite"></span></h3>
             <ul>
-                <li><strong>Simplex:</strong> Só vai em uma direção (Rádio FM).</li>
-                <li><strong>Half-Duplex:</strong> Vai e volta, mas <strong>não</strong> ao mesmo tempo (Walkie-Talkie).</li>
-                <li><strong>Full-Duplex:</strong> Vai e volta ao mesmo tempo (Telefone, Switch).</li>
+                <li><strong>LAN (Local Area Network):</strong> Pequenas distâncias (prédio, sala). <span class="cite">[cite: 1720]</span></li>
+                <li><strong>MAN (Metropolitan Area Network):</strong> Área de grande porte (cidade). <span class="cite">[cite: 1721]</span></li>
+                <li><strong>WAN (Wide Area Network):</strong> Amplo alcance, engloba cidades/países (Internet). <span class="cite">[cite: 1722]</span></li>
             </ul>
         </div>
     </div>
 
-    <div id="conteudo" class="tab-content">
-        <h2>Conteúdo Aprofundado (Protocolos e IP)</h2>
+    <div id="conceitos" class="tab-content">
+        <h2>Tipos de Comunicação e Topologias</h2>
+
+        <div class="card">
+            <h3>Modos e Formatos de Comunicação <span class="cite"></span></h3>
+            <ul>
+                <li><strong>Orientada à Conexão (ex: TCP):</strong> Análogo ao telefone. Cria o caminho, verifica entrega, confiável. A ordem dos dados é mantida. <span class="cite">[cite: 1578]</span></li>
+                <li><strong>Não Orientada à Conexão (ex: UDP, IP):</strong> Análogo ao correio postal. Só manda pro endereço de destino. Pode chegar fora de ordem e não tem garantia de entrega. <span class="cite">[cite: 1586]</span></li>
+                <li><strong>Assíncrona:</strong> Remetente e receptor NÃO sincronizam tempo antes de transmitir. Ex: Email. <span class="cite">[cite: 1595]</span></li>
+                <li><strong>Síncrona:</strong> Remetente e receptor em sincronia, bits enviados em intervalos de tempo constantes. Ex: Videoconferência. <span class="cite">[cite: 1596]</span></li>
+            </ul>
+            <p><strong>Direção:</strong> Simplex (só uma via - TV), Half-Duplex (vai e volta, mas não ao mesmo tempo - rádio), Full-Duplex (simultâneo - telefone/switch). <span class="cite">[cite: 1602, 1603, 1609]</span></p>
+        </div>
 
         <div class="card destaque">
-            <h3>Endereço MAC vs Endereço IP (NOVO)</h3>
-            <ul>
-                <li><strong>MAC (Media Access Control):</strong> Endereço FÍSICO. Gravado na placa de rede (NIC) pelo <strong>fabricante</strong> na hora da montagem. Atua na Camada 2. É único no mundo e (em tese) fixo.</li>
-                <li><strong>IP (Internet Protocol):</strong> Endereço LÓGICO. Atribuído pelo <strong>administrador da rede</strong> (estático) ou por um servidor DHCP (dinâmico). Atua na Camada 3. Muda dependendo da rede que você conecta.</li>
+            <h3>As 4 Topologias Principais <span class="cite">[cite: 1622, 1659, 1668, 1679]</span></h3>
+            <ul class="list-unstyled">
+                <li><strong>1. Barramento (Bus):</strong> Todos num único cabo. É barato, mas se o cabo parte, a rede inteira cai. Ocorre <strong>colisão</strong> com frequência (se dois tentam falar, param e tentam depois de tempo aleatório). <span class="cite">[cite: 1622, 1627, 1646]</span></li>
+                <li><strong>2. Anel (Ring):</strong> Ligação ponto a ponto num circuito fechado. Funciona com passagem de <em>"Token"</em> (só fala quem tem a ficha). Se uma máquina parar, as outras param. <span class="cite">[cite: 1659, 1662, 1663]</span></li>
+                <li><strong>3. Estrela (Star):</strong> Possui nó central (Switch). Vantagem: se um cabo parte, só aquela máquina cai. Desvantagem: se o switch queimar, a rede toda cai. É a mais usada em LAN. <span class="cite">[cite: 1668, 1671, 1672]</span></li>
+                <li><strong>4. Malha (Mesh):</strong> Redundância total, todos ligados a quase todos. Extremamente cara e difícil de instalar, mas imune a falhas simples. Usada em backbones WAN. <span class="cite">[cite: 1679, 1684, 1688]</span></li>
             </ul>
         </div>
-        
-        <div class="card">
-            <h3>O Modelo TCP/IP vs OSI</h3>
-            <p>O TCP/IP tem apenas 4 camadas:</p>
+    </div>
+
+    <div id="osi" class="tab-content">
+        <h2>Modelos OSI e TCP/IP + Endereçamento</h2>
+
+        <div class="card alerta">
+            <h3>Diferença OSI vs TCP/IP <span class="cite">[cite: 1345, 1370, 1371, 1380]</span></h3>
+            <p>Enquanto o OSI é um guia conceitual de 7 camadas, o TCP/IP foi aplicado de fato na Internet e possui apenas 4 camadas. <span class="cite">[cite: 1380, 1268]</span></p>
             <ul>
-                <li><strong>Interface de Rede:</strong> Camadas Física e Enlace do OSI.</li>
-                <li><strong>Rede (Internet):</strong> Equivale à Rede do OSI.</li>
-                <li><strong>Transporte:</strong> Equivale à Transporte do OSI.</li>
-                <li><strong>Aplicação:</strong> Agrupa as camadas de Sessão, Apresentação e Aplicação do OSI.</li>
+                <li>No TCP/IP, as camadas OSI de <strong>Física e Enlace</strong> viraram uma só: <strong>Interface de Rede</strong>. <span class="cite">[cite: 1371]</span></li>
+                <li>No TCP/IP, a camada de Rede virou <strong>Rede / Inter-rede</strong>. <span class="cite">[cite: 1298]</span></li>
+                <li>No TCP/IP, a camada de Transporte manteve o nome. <span class="cite">[cite: 1288]</span></li>
+                <li>No TCP/IP, as camadas OSI de <strong>Sessão, Apresentação e Aplicação</strong> viraram uma só: <strong>Aplicação</strong>. <span class="cite">[cite: 1370]</span></li>
             </ul>
         </div>
 
         <div class="card">
-            <h3>As Sete Camadas do Modelo OSI</h3>
-            <ul class="list-unstyled">
-                <li><strong>1. Física:</strong> Transmissão de bits brutos.</li>
-                <li><strong>2. Enlace de Dados:</strong> Entrega quadros de nó a nó e detecta erros (MAC).</li>
-                <li><strong>3. Rede:</strong> Roteamento de pacotes e endereçamento lógico (IP).</li>
-                <li><strong>4. Transporte:</strong> Comunicação fim a fim (Portas).</li>
-                <li><strong>5. Sessão:</strong> Estabelece, gerencia e finaliza as sessões (Login).</li>
-                <li><strong>6. Apresentação:</strong> Tradução, formatação, compactação e criptografia.</li>
-                <li><strong>7. Aplicação:</strong> Interface direta com o usuário (HTTP).</li>
+            <h3>O Endereço Físico: MAC Address <span class="cite">[cite: 1055, 1056, 1057, 1058]</span></h3>
+            <p>Opera na Camada 2 (Enlace). O endereço MAC tem <strong>48 bits</strong> no total. É dividido em duas partes: <span class="cite">[cite: 1055, 1056]</span></p>
+            <ul>
+                <li>Os primeiros <strong>24 bits</strong> identificam o Código do Fabricante (Vendor). <span class="cite">[cite: 1055]</span></li>
+                <li>Os últimos <strong>24 bits</strong> são o Número de Série único daquela placa. <span class="cite">[cite: 1056]</span></li>
+            </ul>
+        </div>
+
+        <div class="card destaque">
+            <h3>Protocolos Cruciais da Prova <span class="cite">[cite: 1397, 1409, 1417, 1431, 1450, 1458, 1467]</span></h3>
+            <ul>
+                <li><strong>ARP:</strong> Descobre o MAC (físico) se você souber o IP (lógico). <span class="cite">[cite: 1397]</span></li>
+                <li><strong>RARP:</strong> Faz o inverso. Descobre o IP conhecendo o MAC. <span class="cite">[cite: 1409]</span></li>
+                <li><strong>ICMP:</strong> Gerencia mensagens de erro na camada de rede. É o protocolo base do comando <code>PING</code>. <span class="cite">[cite: 1417, 1420]</span></li>
+                <li><strong>TCP:</strong> Transporte confiável. Faz o "Handshake" em 3 passos: <em>SYN -> SYN-ACK -> ACK</em> para abrir conexão. <span class="cite">[cite: 1431, 1443, 1444, 1445]</span></li>
+                <li><strong>UDP:</strong> Transporte rápido, envia datagramas, mas NÃO garante a entrega. <span class="cite">[cite: 1450, 1454]</span></li>
+                <li><strong>SMTP e POP3:</strong> SMTP envia email para a internet. POP3 recebe os emails para a máquina local. <span class="cite">[cite: 1467, 1472, 1473]</span></li>
             </ul>
         </div>
     </div>
@@ -362,10 +339,10 @@
             <div class="flashcard" onclick="this.classList.toggle('flipped')">
                 <div class="flashcard-inner">
                     <div class="flashcard-front">
-                        Quem atribui o Endereço MAC e quem atribui o Endereço IP? (NOVO)
+                        Quais são os nomes das PDUs nas camadas de Transporte, Rede e Enlace? <span class="cite">[cite: 953, 959, 963]</span>
                     </div>
                     <div class="flashcard-back">
-                        <p>O <b>MAC</b> é atribuído pelo <b>Fabricante</b> da placa de rede (é físico/fixo).<br><br>O <b>IP</b> é atribuído pelo <b>Administrador da rede</b> ou DHCP (é lógico/mutável).</p>
+                        <p><b>Transporte:</b> Segmento<br><b>Rede:</b> Pacote / Datagrama<br><b>Enlace:</b> Quadro / Frame</p>
                     </div>
                 </div>
             </div>
@@ -373,10 +350,10 @@
             <div class="flashcard" onclick="this.classList.toggle('flipped')">
                 <div class="flashcard-inner">
                     <div class="flashcard-front">
-                        A máscara 255.0.255.0 é válida? (NOVO)
+                        O que é a Topologia em Barramento e qual seu maior problema? <span class="cite">[cite: 1622, 1646]</span>
                     </div>
                     <div class="flashcard-back">
-                        <p><b>NÃO.</b><br>Em binário, os números "1" devem ser sequenciais. Não pode haver intercalação de octetos vazios (zeros) no meio da máscara.</p>
+                        <p>Todos os computadores ligados em série num único cabo coaxial. O maior problema é a <b>Colisão de dados</b>. Se o cabo parte, a rede cai.</p>
                     </div>
                 </div>
             </div>
@@ -384,10 +361,10 @@
             <div class="flashcard" onclick="this.classList.toggle('flipped')">
                 <div class="flashcard-inner">
                     <div class="flashcard-front">
-                        Qual a principal diferença entre os protocolos TCP e UDP?
+                        O protocolo PING roda em cima de qual protocolo maior? <span class="cite">[cite: 1420, 1421]</span>
                     </div>
                     <div class="flashcard-back">
-                        <p>O <b>TCP</b> é orientado à conexão, garante a entrega e ordena pacotes.<br>O <b>UDP</b> não é orientado à conexão, não garante entrega, mas é mais rápido.</p>
+                        <p>Roda no protocolo <b>ICMP (Internet Control Message Protocol)</b>, usado para testes e mensagens de erro na camada de Rede.</p>
                     </div>
                 </div>
             </div>
@@ -395,10 +372,10 @@
             <div class="flashcard" onclick="this.classList.toggle('flipped')">
                 <div class="flashcard-inner">
                     <div class="flashcard-front">
-                        Para que serve o protocolo ARP?
+                        Quantos bits tem um Endereço MAC e como ele é dividido? <span class="cite">[cite: 1055, 1056]</span>
                     </div>
                     <div class="flashcard-back">
-                        <p><b>Address Resolution Protocol:</b> Serve para descobrir o endereço físico (MAC) a partir de um endereço lógico conhecido (IP) na rede local.</p>
+                        <p>Possui <b>48 bits</b>.<br>Os primeiros 24 bits indicam o fabricante e os últimos 24 bits são o número de série da placa.</p>
                     </div>
                 </div>
             </div>
@@ -406,10 +383,10 @@
             <div class="flashcard" onclick="this.classList.toggle('flipped')">
                 <div class="flashcard-inner">
                     <div class="flashcard-front">
-                        Quais são as faixas de IP Privado das classes A, B e C?
+                        Qual a diferença entre Comunicação Síncrona e Assíncrona? <span class="cite">[cite: 1595, 1596]</span>
                     </div>
                     <div class="flashcard-back">
-                        <p><b>A:</b> 10.0.0.0 até 10.255.255.255<br><b>B:</b> 172.16.0.0 até 172.31.255.255<br><b>C:</b> 192.168.0.0 até 192.168.255.255</p>
+                        <p><b>Síncrona:</b> Intervalo de tempo constante (sincronizado). Ex: Videoconferência.<br><b>Assíncrona:</b> Sem tempo fixo, transmite quando quer. Ex: E-mail.</p>
                     </div>
                 </div>
             </div>
@@ -422,35 +399,35 @@
         <div id="quiz-container">
 
             <div class="quiz-question">
-                <p><strong>1. Considere o IP 192.168.256.10. Ele é um endereço IP válido? (NOVO)</strong></p>
-                <label class="quiz-option"><input type="radio" name="q1" value="wrong"> Sim, é um IP de classe C perfeitamente válido.</label>
-                <label class="quiz-option"><input type="radio" name="q1" value="wrong"> Sim, desde que a máscara de sub-rede seja padrão.</label>
-                <label class="quiz-option"><input type="radio" name="q1" value="correct"> Não, pois os octetos não podem ultrapassar o valor 255.</label>
-                <label class="quiz-option"><input type="radio" name="q1" value="wrong"> Não, pois o primeiro octeto deve ser menor que 127.</label>
+                <p><strong>1. Assinale a alternativa que mapeia CORRETAMENTE as camadas do Modelo OSI que foram mescladas para formar a camada de "Interface de Rede" no modelo TCP/IP. <span class="cite">[cite: 1371]</span></strong></p>
+                <label class="quiz-option"><input type="radio" name="q1" value="wrong"> Transporte e Rede</label>
+                <label class="quiz-option"><input type="radio" name="q1" value="wrong"> Aplicação, Apresentação e Sessão</label>
+                <label class="quiz-option"><input type="radio" name="q1" value="correct"> Física e Enlace de Dados</label>
+                <label class="quiz-option"><input type="radio" name="q1" value="wrong"> Rede e Enlace de Dados</label>
             </div>
 
             <div class="quiz-question">
-                <p><strong>2. Qual equipamento de rede deve ser utilizado para interligar duas redes lógicas distintas e possui a capacidade de isolar (quebrar) domínios de broadcast?</strong></p>
-                <label class="quiz-option"><input type="radio" name="q2" value="wrong"> Hub</label>
-                <label class="quiz-option"><input type="radio" name="q2" value="wrong"> Repetidor</label>
-                <label class="quiz-option"><input type="radio" name="q2" value="correct"> Roteador</label>
-                <label class="quiz-option"><input type="radio" name="q2" value="wrong"> Switch</label>
+                <p><strong>2. Na topologia de rede em Anel, como o controle de transmissão é gerenciado para evitar colisões simultâneas? <span class="cite">[cite: 1662, 1663]</span></strong></p>
+                <label class="quiz-option"><input type="radio" name="q2" value="wrong"> Um Switch central determina a vez de cada máquina.</label>
+                <label class="quiz-option"><input type="radio" name="q2" value="wrong"> Através de tempo aleatório de espera quando detectam tensão no fio.</label>
+                <label class="quiz-option"><input type="radio" name="q2" value="correct"> A comunicação é baseada na troca de "Tokens" (fichas).</label>
+                <label class="quiz-option"><input type="radio" name="q2" value="wrong"> O roteador atribui IPs diferentes para pacotes conflitantes.</label>
             </div>
 
             <div class="quiz-question">
-                <p><strong>3. Se você tem um PC com IP 192.168.20.4 e máscara 255.255.255.0, qual é o IP que representa a REDE inteira? (NOVO)</strong></p>
-                <label class="quiz-option"><input type="radio" name="q3" value="correct"> 192.168.20.0</label>
-                <label class="quiz-option"><input type="radio" name="q3" value="wrong"> 192.168.20.255</label>
-                <label class="quiz-option"><input type="radio" name="q3" value="wrong"> 192.168.0.0</label>
-                <label class="quiz-option"><input type="radio" name="q3" value="wrong"> 192.168.20.1</label>
+                <p><strong>3. Durante a comunicação fim-a-fim, um dos protocolos mais famosos da camada de Transporte utiliza a técnica de handshake (aperto de mão) em 3 etapas (SYN -> SYN-ACK -> ACK) para garantir conexões. Qual é esse protocolo? <span class="cite">[cite: 1431, 1443, 1444, 1445]</span></strong></p>
+                <label class="quiz-option"><input type="radio" name="q3" value="correct"> TCP</label>
+                <label class="quiz-option"><input type="radio" name="q3" value="wrong"> UDP</label>
+                <label class="quiz-option"><input type="radio" name="q3" value="wrong"> ICMP</label>
+                <label class="quiz-option"><input type="radio" name="q3" value="wrong"> ARP</label>
             </div>
 
             <div class="quiz-question">
-                <p><strong>4. Ao enviar uma requisição, o pacote passa pelas camadas do remetente agregando cabeçalhos (Encapsulamento). O endereçamento Lógico (IP) e o endereçamento Físico (MAC) são agregados, respectivamente, em quais camadas do OSI?</strong></p>
-                <label class="quiz-option"><input type="radio" name="q4" value="correct"> Rede (IP) e Enlace (MAC).</label>
-                <label class="quiz-option"><input type="radio" name="q4" value="wrong"> Transporte (IP) e Rede (MAC).</label>
-                <label class="quiz-option"><input type="radio" name="q4" value="wrong"> Aplicação (IP) e Física (MAC).</label>
-                <label class="quiz-option"><input type="radio" name="q4" value="wrong"> Enlace (IP) e Rede (MAC).</label>
+                <p><strong>4. Considere a necessidade de projetar o Backbone de uma WAN de altíssima confiabilidade onde, se uma rota falhar, as conexões encontram caminhos alternativos automaticamente. Apesar do alto custo, a topologia mais adequada é: <span class="cite">[cite: 1679, 1684, 1688]</span></strong></p>
+                <label class="quiz-option"><input type="radio" name="q4" value="wrong"> Barramento (Bus)</label>
+                <label class="quiz-option"><input type="radio" name="q4" value="wrong"> Estrela (Star)</label>
+                <label class="quiz-option"><input type="radio" name="q4" value="wrong"> Anel (Ring)</label>
+                <label class="quiz-option"><input type="radio" name="q4" value="correct"> Malha (Mesh)</label>
             </div>
 
             <button class="quiz-btn" onclick="checkQuiz()">Corrigir Quiz</button>
@@ -490,7 +467,6 @@
                         options[i].classList.add('wrong-answer');
                     }
                 }
-                // Mostra a correta se a pessoa errou
                 if(input.value === 'correct') {
                     options[i].classList.add('correct-answer');
                 }
