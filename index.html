@@ -87,6 +87,10 @@
             border-left: 4px solid var(--primary);
         }
 
+        .card.destaque {
+            border-left: 4px solid var(--secondary);
+        }
+
         .card h3 {
             margin-top: 0;
             color: var(--primary);
@@ -230,7 +234,7 @@
 
     <header>
         <h1>🌐 Revisão: Arquitetura de Redes</h1>
-        <p>Foco na Prova - Topologias, Equipamentos e Modelo OSI</p>
+        <p>Foco na Prova - Topologias, Modelo OSI, IP e Máscaras</p>
     </header>
 
     <div class="tabs">
@@ -245,135 +249,106 @@
         <h2>Perguntas da Revisão Oficial</h2>
         
         <div class="card">
-            <h3>1. Topologia comumente utilizada para LAN (Rede Local) <span class="cite">[cite: 7318, 7319, 7320]</span></h3>
+            <h3>1. Topologia comumente utilizada para LAN (Rede Local)</h3>
             <p>A topologia mais utilizada para LAN é a <strong>Estrela</strong>.</p>
             <ul>
-                <li><strong>Vantagens:</strong> Maior tolerância a falhas (se uma máquina ou cabo parar, apenas aquela estação cai), facilidade de instalação e manutenção, e monitoramento centralizado.</li>
-                <li><strong>Desvantagens:</strong> Custo de instalação maior (requer mais cabos) e dependência total do nó central (se o Switch parar, a rede inteira cai).</li>
+                <li><strong>Vantagens:</strong> Maior tolerância a falhas (se uma máquina ou cabo parar, apenas aquela estação cai), facilidade de instalação e manutenção.</li>
+                <li><strong>Desvantagens:</strong> Dependência total do nó central (se o Switch parar, a rede inteira cai).</li>
             </ul>
         </div>
 
         <div class="card">
-            <h3>2. Topologia comumente utilizada em um backbone WAN <span class="cite">[cite: 7330, 7331, 7335]</span></h3>
+            <h3>2. Topologia comumente utilizada em um backbone WAN</h3>
             <p>A topologia mais utilizada para backbone WAN é a <strong>Malha</strong>.</p>
             <ul>
-                <li><strong>Vantagens:</strong> Transmissão de dados mais consistente e excelente redundância (se um link falhar, a rede não é interrompida, pois os dados encontram outro caminho).</li>
+                <li><strong>Vantagens:</strong> Transmissão de dados mais consistente e excelente redundância.</li>
                 <li><strong>Desvantagens:</strong> Requer uma enorme quantidade de cabos/links, tornando sua implementação muito cara.</li>
             </ul>
         </div>
 
         <div class="card">
-            <h3>3, 4 e 5. Domínios de Colisão e Broadcast <span class="cite">[cite: 7389, 7394, 7404, 7412]</span></h3>
-            <p><strong>3. Repetidor / Hub (Camada 1):</strong> Máquinas interligadas por um repetidor ESTÃO no mesmo domínio de colisão e ESTÃO no mesmo domínio de broadcast.</p>
-            <p><strong>4. Switch (Camada 2):</strong> Máquinas conectadas em um switch <span class="highlight">NÃO estão</span> no mesmo domínio de colisão (o switch quebra o domínio de colisão por porta), mas ESTÃO no mesmo domínio de broadcast.</p>
-            <p><strong>5. Roteador (Camada 3):</strong> Máquinas conectadas a portas diferentes de um roteador <span class="highlight">NÃO estão</span> no mesmo domínio de colisão e <span class="highlight">NÃO estão</span> no mesmo domínio de broadcast (o roteador isola redes e quebra domínios de broadcast).</p>
+            <h3>3, 4 e 5. Domínios de Colisão e Broadcast</h3>
+            <p><strong>Repetidor / Hub (Camada 1):</strong> Máquinas interligadas ESTÃO no mesmo domínio de colisão e broadcast.</p>
+            <p><strong>Switch (Camada 2):</strong> Máquinas conectadas <span class="highlight">NÃO estão</span> no mesmo domínio de colisão (quebrado por porta), mas ESTÃO no mesmo domínio de broadcast.</p>
+            <p><strong>Roteador (Camada 3):</strong> <span class="highlight">Quebra domínios de broadcast</span> e de colisão.</p>
+        </div>
+
+        <div class="card destaque">
+            <h3>Atividade: Endereços IP e Máscaras (NOVO)</h3>
+            <p><strong>IP Válido:</strong> Possui 4 octetos e números entre 0 e 255. Ex: 192.168.0.1. Inválido: 10.0.1 (só 3 octetos) ou 192.168.256.1 (passa de 255).</p>
+            <p><strong>Máscara Válida:</strong> Em binário, deve ter "1"s contínuos. Na prática, não pode alternar. Válidas: 255.0.0.0, 255.255.0.0. Inválidas: 255.0.255.0 (intercalou zero no meio).</p>
         </div>
 
         <div class="card">
-            <h3>6. Por que adotar um padrão como o modelo OSI? <span class="cite">[cite: 6466, 6488, 6512]</span></h3>
-            <p>A adoção de um padrão aberto como o Modelo OSI evita o monopólio de soluções proprietárias, permitindo que equipamentos de fabricantes diferentes se comuniquem perfeitamente. A modularização em camadas facilita a manutenção, a identificação de problemas e garante que mudanças na implementação de uma camada sejam transparentes para o resto do sistema.</p>
-        </div>
-
-        <div class="card">
-            <h3>7. Como funciona o encapsulamento de dados? <span class="cite">[cite: 6519, 6520]</span></h3>
-            <p>No encapsulamento, quando uma aplicação envia dados, esses dados descem pelas camadas do modelo. Cada camada acrescenta seu próprio cabeçalho (com informações de controle relevantes apenas para ela, como IPs na camada de Rede e MAC na camada de Enlace) ao pacote recebido da camada superior. Ao chegar ao destino (desencapsulamento), o processo inverso ocorre: cada camada lê e remove seu cabeçalho até entregar o dado puro à aplicação final.</p>
-        </div>
-
-        <div class="card">
-            <h3>8. As Sete Camadas do Modelo OSI <span class="cite">[cite: 6650, 6675, 6720, 6744, 6790, 6821, 6849]</span></h3>
-            <ul class="list-unstyled">
-                <li><strong>1. Física:</strong> Transmissão de bits brutos pelo canal de comunicação (sinais elétricos, mecânicos).</li>
-                <li><strong>2. Enlace de Dados:</strong> Entrega quadros (frames) de nó a nó e detecta erros. Faz o endereçamento físico (MAC).</li>
-                <li><strong>3. Rede:</strong> Roteamento de pacotes e endereçamento lógico (IP) da origem ao destino final.</li>
-                <li><strong>4. Transporte:</strong> Comunicação fim a fim. Cuida da integridade, controle de fluxo e portas (segmentos).</li>
-                <li><strong>5. Sessão:</strong> Estabelece, gerencia e finaliza as sessões (diálogos) entre aplicações (ex: login/autenticação).</li>
-                <li><strong>6. Apresentação:</strong> Tradução, formatação, compactação e criptografia dos dados (sintaxe/semântica).</li>
-                <li><strong>7. Aplicação:</strong> Interface direta com o usuário, provendo serviços de rede aos aplicativos (ex: HTTP, FTP, E-mail).</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>9. Associação de Camadas às Funções <span class="cite">[cite: 6650, 6675, 6720, 6744, 6790, 6821, 6849]</span></h3>
-            <p><strong>( 4 )</strong> Endereçamento fim a fim da rede de computadores <em>(Transporte)</em></p>
-            <p><strong>( 7 )</strong> Protocolos que fazem a interface com o usuário <em>(Aplicação)</em></p>
-            <p><strong>( 2 )</strong> Realiza a conexão entre um elemento de rede e o próximo elemento de rede <em>(Enlace)</em></p>
-            <p><strong>( 3 )</strong> Responsável pelo endereçamento lógico dos pacotes <em>(Rede)</em></p>
-            <p><strong>( 1 )</strong> Interface com os meios de comunicação <em>(Física)</em></p>
-            <p><strong>( 5 )</strong> Responsável pela permissão ou não do usuário (ex: login) <em>(Sessão)</em></p>
-            <p><strong>( 6 )</strong> Compactação de Dados e Criptografia <em>(Apresentação)</em></p>
+            <h3>7. Como funciona o encapsulamento de dados?</h3>
+            <p>No encapsulamento, quando uma aplicação envia dados, esses dados descem pelas camadas. Cada camada acrescenta seu próprio cabeçalho (IPs na de Rede, MAC na de Enlace). Ao chegar ao destino, o processo inverso ocorre (desencapsulamento).</p>
         </div>
     </div>
 
     <div id="resumo" class="tab-content">
         <h2>Resumo Rápido (Cheat Sheet)</h2>
+
+        <div class="card destaque">
+            <h3>Regras de Ouro: Endereçamento (NOVO)</h3>
+            <ul>
+                <li><strong>Classe A (Público/Privado):</strong> Rede.Host.Host.Host | Privado: 10.x.x.x</li>
+                <li><strong>Classe B (Público/Privado):</strong> Rede.Rede.Host.Host | Privado: 172.16.x.x até 172.31.x.x</li>
+                <li><strong>Classe C (Público/Privado):</strong> Rede.Rede.Rede.Host | Privado: 192.168.x.x</li>
+                <li><strong>Loopback:</strong> 127.x.x.x (reservado para testes da própria máquina).</li>
+            </ul>
+        </div>
         
         <div class="card">
-            <h3>Equipamentos e Camadas (O que você precisa saber!) <span class="cite">[cite: 7388, 7401, 7409]</span></h3>
+            <h3>Equipamentos e Camadas</h3>
             <ul>
-                <li><strong>Hub / Repetidor:</strong> Camada 1 (Física). Apenas repete sinal. Não entende nada de IP nem MAC. Cria grande domínio de colisão e broadcast.</li>
-                <li><strong>Switch:</strong> Camada 2 (Enlace). Trabalha com MAC Address. <strong>Quebra domínio de colisão</strong> por porta, mas mantém o domínio de broadcast.</li>
-                <li><strong>Roteador:</strong> Camada 3 (Rede). Trabalha com IP. Roteia pacotes. <strong>Quebra domínios de broadcast</strong>.</li>
+                <li><strong>Hub / Repetidor:</strong> Camada 1 (Física). Apenas repete sinal.</li>
+                <li><strong>Switch:</strong> Camada 2 (Enlace). Trabalha com MAC. <strong>Quebra domínio de colisão</strong>.</li>
+                <li><strong>Roteador:</strong> Camada 3 (Rede). Trabalha com IP. <strong>Quebra domínios de broadcast</strong>.</li>
             </ul>
         </div>
 
         <div class="card">
-            <h3>Tipos de Endereçamento <span class="cite">[cite: 5880, 5881, 5882]</span></h3>
+            <h3>Modos de Comunicação (Direção)</h3>
             <ul>
-                <li><strong>Endereço Físico (MAC):</strong> Atribuído na Camada de Enlace (Camada 2). Indica o próximo equipamento da rede local a receber o frame. (Ex: Placa de rede).</li>
-                <li><strong>Endereço Lógico (IP):</strong> Atribuído na Camada de Rede (Camada 3). Indica a origem e destino final do pacote, não importa por quantas redes passe.</li>
-                <li><strong>Endereço de Serviço (Porta):</strong> Atribuído na Camada de Transporte (Camada 4 - TCP/UDP). Indica qual aplicação vai receber o pacote (Ex: Porta 80 para web).</li>
-            </ul>
-        </div>
-
-        <div class="card">
-            <h3>Modos de Comunicação (Direção) <span class="cite">[cite: 7249, 7250, 7256]</span></h3>
-            <ul>
-                <li><strong>Simplex:</strong> Só vai em uma direção (Ex: Rádio FM, TV aberta).</li>
-                <li><strong>Half-Duplex:</strong> Vai e volta, mas <strong>não</strong> ao mesmo tempo (Ex: Walkie-Talkie). Colisões no barramento ocorrem nesse cenário.</li>
-                <li><strong>Full-Duplex:</strong> Vai e volta ao mesmo tempo, simultaneamente (Ex: Telefone, Switch moderno).</li>
+                <li><strong>Simplex:</strong> Só vai em uma direção (Rádio FM).</li>
+                <li><strong>Half-Duplex:</strong> Vai e volta, mas <strong>não</strong> ao mesmo tempo (Walkie-Talkie).</li>
+                <li><strong>Full-Duplex:</strong> Vai e volta ao mesmo tempo (Telefone, Switch).</li>
             </ul>
         </div>
     </div>
 
     <div id="conteudo" class="tab-content">
         <h2>Conteúdo Aprofundado (Protocolos e IP)</h2>
+
+        <div class="card destaque">
+            <h3>Endereço MAC vs Endereço IP (NOVO)</h3>
+            <ul>
+                <li><strong>MAC (Media Access Control):</strong> Endereço FÍSICO. Gravado na placa de rede (NIC) pelo <strong>fabricante</strong> na hora da montagem. Atua na Camada 2. É único no mundo e (em tese) fixo.</li>
+                <li><strong>IP (Internet Protocol):</strong> Endereço LÓGICO. Atribuído pelo <strong>administrador da rede</strong> (estático) ou por um servidor DHCP (dinâmico). Atua na Camada 3. Muda dependendo da rede que você conecta.</li>
+            </ul>
+        </div>
         
         <div class="card">
-            <h3>1. O Modelo TCP/IP vs OSI <span class="cite">[cite: 7017, 7018]</span></h3>
-            <p>A internet moderna usa a pilha TCP/IP, que é mais enxuta que o OSI. O TCP/IP tem apenas 4 camadas:</p>
+            <h3>O Modelo TCP/IP vs OSI</h3>
+            <p>O TCP/IP tem apenas 4 camadas:</p>
             <ul>
-                <li><strong>Interface de Rede (Network Access):</strong> Agrupa as camadas Física e Enlace do OSI. (Ex: Ethernet, Mac).</li>
-                <li><strong>Inter-Rede / Rede (Internet):</strong> Equivale à Rede do OSI. Foca no roteamento. (Ex: IP, ICMP).</li>
-                <li><strong>Transporte:</strong> Equivale à Transporte do OSI. (Ex: TCP, UDP).</li>
-                <li><strong>Aplicação:</strong> Agrupa as camadas de Sessão, Apresentação e Aplicação do OSI. (Ex: HTTP, FTP, DNS).</li>
+                <li><strong>Interface de Rede:</strong> Camadas Física e Enlace do OSI.</li>
+                <li><strong>Rede (Internet):</strong> Equivale à Rede do OSI.</li>
+                <li><strong>Transporte:</strong> Equivale à Transporte do OSI.</li>
+                <li><strong>Aplicação:</strong> Agrupa as camadas de Sessão, Apresentação e Aplicação do OSI.</li>
             </ul>
         </div>
 
         <div class="card">
-            <h3>2. Classes de IP (IPv4) <span class="cite">[cite: 5976, 5982, 5985, 6078, 6079, 6080]</span></h3>
-            <p>O endereço IP possui 32 bits, dividido em 4 octetos (ex: 192.168.0.1). Para saber qual parte do IP é a Rede e qual é a Máquina (Host), criaram-se classes de endereçamento baseadas na Máscara de Sub-rede.</p>
-            <ul>
-                <li><strong>Classe A:</strong> Máscara 255.0.0.0. Apenas o 1º octeto é a rede (R.H.H.H). Usado por redes gigantes. Vai do IP 1 ao 126.</li>
-                <li><strong>Classe B:</strong> Máscara 255.255.0.0. Os dois primeiros octetos são rede (R.R.H.H). Vai do 128 ao 191.</li>
-                <li><strong>Classe C:</strong> Máscara 255.255.255.0. Os três primeiros octetos são rede (R.R.R.H). Muito usado em redes locais e casas. Vai do 192 ao 223.</li>
-            </ul>
-            <p><span class="highlight">Atenção: Endereços Privados (não válidos na internet pública):</span></p>
-            <ul>
-                <li>Classe A privada: <strong>10.x.x.x</strong></li>
-                <li>Classe B privada: <strong>172.16.x.x</strong> até 172.31.x.x</li>
-                <li>Classe C privada: <strong>192.168.x.x</strong></li>
-            </ul>
-            <p><i>Nota: Endereços terminados em ".0" identificam a própria rede, e ".255" identificam o Broadcast da rede (não podem ser dados a computadores).</i></p>
-        </div>
-
-        <div class="card">
-            <h3>3. Protocolos Principais <span class="cite">[cite: 7047, 7067, 7082, 7101, 7143]</span></h3>
-            <ul>
-                <li><strong>TCP:</strong> Protocolo de Transporte orientado à conexão. Garante a entrega dos pacotes, controle de fluxo e ordena os pacotes que chegam bagunçados.</li>
-                <li><strong>UDP:</strong> Protocolo de Transporte não orientado à conexão. Joga os dados na rede (datagramas) e não garante entrega. Mais rápido que o TCP, bom para streaming e jogos.</li>
-                <li><strong>ARP:</strong> Resolve IPs para endereços físicos MAC. Se você sabe o IP do alvo, mas não o MAC, o ARP descobre para a camada de Enlace poder montar o quadro.</li>
-                <li><strong>ICMP:</strong> Protocolo de controle e erro da camada de Rede. É ele que roda por trás do comando <code>ping</code>.</li>
-                <li><strong>DNS:</strong> Converte nomes humanos (www.unip.br) para endereços IP (200.x.x.x).</li>
+            <h3>As Sete Camadas do Modelo OSI</h3>
+            <ul class="list-unstyled">
+                <li><strong>1. Física:</strong> Transmissão de bits brutos.</li>
+                <li><strong>2. Enlace de Dados:</strong> Entrega quadros de nó a nó e detecta erros (MAC).</li>
+                <li><strong>3. Rede:</strong> Roteamento de pacotes e endereçamento lógico (IP).</li>
+                <li><strong>4. Transporte:</strong> Comunicação fim a fim (Portas).</li>
+                <li><strong>5. Sessão:</strong> Estabelece, gerencia e finaliza as sessões (Login).</li>
+                <li><strong>6. Apresentação:</strong> Tradução, formatação, compactação e criptografia.</li>
+                <li><strong>7. Aplicação:</strong> Interface direta com o usuário (HTTP).</li>
             </ul>
         </div>
     </div>
@@ -383,13 +358,14 @@
         <p style="text-align:center; color: var(--text-muted); margin-bottom: 2rem;">Perguntas curtas para autoavaliação.</p>
 
         <div class="flashcard-grid">
+
             <div class="flashcard" onclick="this.classList.toggle('flipped')">
                 <div class="flashcard-inner">
                     <div class="flashcard-front">
-                        O que é Simplex, Half-Duplex e Full-Duplex? <span class="cite">[cite: 7249, 7250, 7256]</span>
+                        Quem atribui o Endereço MAC e quem atribui o Endereço IP? (NOVO)
                     </div>
                     <div class="flashcard-back">
-                        <p><b>Simplex:</b> Só envia ou só recebe (Rádio).<br><b>Half-Duplex:</b> Envia e recebe, mas NÃO ao mesmo tempo (Walkie-Talkie).<br><b>Full-Duplex:</b> Envia e recebe simultaneamente (Telefone, Switch).</p>
+                        <p>O <b>MAC</b> é atribuído pelo <b>Fabricante</b> da placa de rede (é físico/fixo).<br><br>O <b>IP</b> é atribuído pelo <b>Administrador da rede</b> ou DHCP (é lógico/mutável).</p>
                     </div>
                 </div>
             </div>
@@ -397,10 +373,10 @@
             <div class="flashcard" onclick="this.classList.toggle('flipped')">
                 <div class="flashcard-inner">
                     <div class="flashcard-front">
-                        Qual a principal diferença entre os protocolos TCP e UDP? <span class="cite">[cite: 7082, 7101]</span>
+                        A máscara 255.0.255.0 é válida? (NOVO)
                     </div>
                     <div class="flashcard-back">
-                        <p>O <b>TCP</b> é orientado à conexão, garante a entrega, sincroniza e ordena pacotes.<br>O <b>UDP</b> não é orientado à conexão, envia datagramas sem garantia de entrega, mas é mais rápido.</p>
+                        <p><b>NÃO.</b><br>Em binário, os números "1" devem ser sequenciais. Não pode haver intercalação de octetos vazios (zeros) no meio da máscara.</p>
                     </div>
                 </div>
             </div>
@@ -408,10 +384,10 @@
             <div class="flashcard" onclick="this.classList.toggle('flipped')">
                 <div class="flashcard-inner">
                     <div class="flashcard-front">
-                        Para que serve o protocolo ARP? <span class="cite">[cite: 7047]</span>
+                        Qual a principal diferença entre os protocolos TCP e UDP?
                     </div>
                     <div class="flashcard-back">
-                        <p><b>Address Resolution Protocol:</b> Ele serve para descobrir o endereço físico (MAC Address) a partir de um endereço lógico conhecido (IP) na rede local.</p>
+                        <p>O <b>TCP</b> é orientado à conexão, garante a entrega e ordena pacotes.<br>O <b>UDP</b> não é orientado à conexão, não garante entrega, mas é mais rápido.</p>
                     </div>
                 </div>
             </div>
@@ -419,21 +395,10 @@
             <div class="flashcard" onclick="this.classList.toggle('flipped')">
                 <div class="flashcard-inner">
                     <div class="flashcard-front">
-                        O que o Roteador faz com o Domínio de Broadcast? <span class="cite">[cite: 7412]</span>
+                        Para que serve o protocolo ARP?
                     </div>
                     <div class="flashcard-back">
-                        <p>O roteador <b>QUEBRA</b> o domínio de broadcast. Ele isola as redes locais, impedindo que mensagens enviadas em broadcast "vazem" e sobrecarreguem outras redes conectadas a ele.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="flashcard" onclick="this.classList.toggle('flipped')">
-                <div class="flashcard-inner">
-                    <div class="flashcard-front">
-                        A Criptografia e a Compressão de dados acontecem em qual camada OSI? <span class="cite">[cite: 6839, 6844]</span>
-                    </div>
-                    <div class="flashcard-back">
-                        <p>Na <b>Camada de Apresentação (Camada 6)</b>. Ela traduz, formata e criptografa os dados para que a aplicação possa os reconhecer perfeitamente.</p>
+                        <p><b>Address Resolution Protocol:</b> Serve para descobrir o endereço físico (MAC) a partir de um endereço lógico conhecido (IP) na rede local.</p>
                     </div>
                 </div>
             </div>
@@ -441,7 +406,7 @@
             <div class="flashcard" onclick="this.classList.toggle('flipped')">
                 <div class="flashcard-inner">
                     <div class="flashcard-front">
-                        Quais são as faixas de IP Privado das classes A, B e C? <span class="cite">[cite: 6078, 6079, 6080]</span>
+                        Quais são as faixas de IP Privado das classes A, B e C?
                     </div>
                     <div class="flashcard-back">
                         <p><b>A:</b> 10.0.0.0 até 10.255.255.255<br><b>B:</b> 172.16.0.0 até 172.31.255.255<br><b>C:</b> 192.168.0.0 até 192.168.255.255</p>
@@ -455,32 +420,33 @@
         <h2>Quiz Rápido de Fixação</h2>
         
         <div id="quiz-container">
+
             <div class="quiz-question">
-                <p><strong>1. Qual equipamento de rede deve ser utilizado para interligar duas redes lógicas distintas e possui a capacidade de isolar (quebrar) domínios de broadcast? <span class="cite">[cite: 7409, 7412]</span></strong></p>
-                <label class="quiz-option"><input type="radio" name="q1" value="wrong"> Hub</label>
-                <label class="quiz-option"><input type="radio" name="q1" value="wrong"> Repetidor</label>
-                <label class="quiz-option"><input type="radio" name="q1" value="correct"> Roteador</label>
-                <label class="quiz-option"><input type="radio" name="q1" value="wrong"> Switch</label>
+                <p><strong>1. Considere o IP 192.168.256.10. Ele é um endereço IP válido? (NOVO)</strong></p>
+                <label class="quiz-option"><input type="radio" name="q1" value="wrong"> Sim, é um IP de classe C perfeitamente válido.</label>
+                <label class="quiz-option"><input type="radio" name="q1" value="wrong"> Sim, desde que a máscara de sub-rede seja padrão.</label>
+                <label class="quiz-option"><input type="radio" name="q1" value="correct"> Não, pois os octetos não podem ultrapassar o valor 255.</label>
+                <label class="quiz-option"><input type="radio" name="q1" value="wrong"> Não, pois o primeiro octeto deve ser menor que 127.</label>
             </div>
 
             <div class="quiz-question">
-                <p><strong>2. Na arquitetura TCP/IP, as camadas do Modelo OSI conhecidas como Física e Enlace de Dados foram combinadas em uma única camada. Qual o nome dessa camada no TCP/IP? <span class="cite">[cite: 7018]</span></strong></p>
-                <label class="quiz-option"><input type="radio" name="q2" value="wrong"> Aplicação</label>
-                <label class="quiz-option"><input type="radio" name="q2" value="correct"> Interface de Rede</label>
-                <label class="quiz-option"><input type="radio" name="q2" value="wrong"> Transporte</label>
-                <label class="quiz-option"><input type="radio" name="q2" value="wrong"> Internet (Inter-rede)</label>
+                <p><strong>2. Qual equipamento de rede deve ser utilizado para interligar duas redes lógicas distintas e possui a capacidade de isolar (quebrar) domínios de broadcast?</strong></p>
+                <label class="quiz-option"><input type="radio" name="q2" value="wrong"> Hub</label>
+                <label class="quiz-option"><input type="radio" name="q2" value="wrong"> Repetidor</label>
+                <label class="quiz-option"><input type="radio" name="q2" value="correct"> Roteador</label>
+                <label class="quiz-option"><input type="radio" name="q2" value="wrong"> Switch</label>
             </div>
 
             <div class="quiz-question">
-                <p><strong>3. Se você precisa configurar um servidor web numa rede fechada de laboratório usando um IP de Classe C reservado para redes privadas, qual destes IPs é a melhor opção? <span class="cite">[cite: 6080]</span></strong></p>
-                <label class="quiz-option"><input type="radio" name="q3" value="wrong"> 10.1.1.5</label>
-                <label class="quiz-option"><input type="radio" name="q3" value="correct"> 192.168.0.10</label>
-                <label class="quiz-option"><input type="radio" name="q3" value="wrong"> 172.16.20.2</label>
-                <label class="quiz-option"><input type="radio" name="q3" value="wrong"> 8.8.8.8</label>
+                <p><strong>3. Se você tem um PC com IP 192.168.20.4 e máscara 255.255.255.0, qual é o IP que representa a REDE inteira? (NOVO)</strong></p>
+                <label class="quiz-option"><input type="radio" name="q3" value="correct"> 192.168.20.0</label>
+                <label class="quiz-option"><input type="radio" name="q3" value="wrong"> 192.168.20.255</label>
+                <label class="quiz-option"><input type="radio" name="q3" value="wrong"> 192.168.0.0</label>
+                <label class="quiz-option"><input type="radio" name="q3" value="wrong"> 192.168.20.1</label>
             </div>
 
             <div class="quiz-question">
-                <p><strong>4. Ao enviar uma requisição, o pacote passa pelas camadas do remetente agregando cabeçalhos (Encapsulamento). O endereçamento Lógico (IP) e o endereçamento Físico (MAC) são agregados, respectivamente, em quais camadas do OSI? <span class="cite">[cite: 6693, 6721]</span></strong></p>
+                <p><strong>4. Ao enviar uma requisição, o pacote passa pelas camadas do remetente agregando cabeçalhos (Encapsulamento). O endereçamento Lógico (IP) e o endereçamento Físico (MAC) são agregados, respectivamente, em quais camadas do OSI?</strong></p>
                 <label class="quiz-option"><input type="radio" name="q4" value="correct"> Rede (IP) e Enlace (MAC).</label>
                 <label class="quiz-option"><input type="radio" name="q4" value="wrong"> Transporte (IP) e Rede (MAC).</label>
                 <label class="quiz-option"><input type="radio" name="q4" value="wrong"> Aplicação (IP) e Física (MAC).</label>
